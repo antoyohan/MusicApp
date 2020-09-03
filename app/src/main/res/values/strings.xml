@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MusicApp</string>
+    <string name="title">MusicAPP</string>
+    <string name="sign_in">SIGN IN</string>
 </resources>
