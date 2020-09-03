@@ -1,4 +1,4 @@
-package com.example.musicapp
+package com.example.musicapp.ui.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,6 +6,8 @@ import android.os.Handler
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.example.musicapp.MainActivity
+import com.example.musicapp.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -54,14 +56,17 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             signin_button.visibility = View.GONE
             progressBar.visibility = View.VISIBLE
             Handler().postDelayed({
-                launchMainActivity()
+                launchMainActivity(account)
                 finish()
             }, 2000)
         }
     }
 
-    private fun launchMainActivity() {
+    private fun launchMainActivity(account: GoogleSignInAccount) {
         val intent = Intent(this, MainActivity::class.java)
+        var bundle = Bundle()
+        bundle.putParcelable("account" , account)
+        intent.putExtra("ACCOUNT" , bundle)
         startActivity(intent)
     }
 
