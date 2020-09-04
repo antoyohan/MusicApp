@@ -41,11 +41,12 @@ class VideoListFragment : Fragment() {
 
         val playlistData = arguments?.let { VideoListFragmentArgs.fromBundle(it).playlist }
         Log.d(TAG, "onViewCreated: ${playlistData?.name}")
-        viewModelFactory = MainViewModelFactory<PlaylistData>(playlistData as PlaylistData)
+        viewModelFactory = MainViewModelFactory(playlistData as PlaylistData)
         viewModel = ViewModelProvider(this, viewModelFactory).get(VideolistViewModel::class.java)
         initRecyclerView()
 
         collapsing_toolbar.title = playlistData.name
+        num_songs.text = getString(if(playlistData.items > 1) R.string.songs_numbers else R.string.songs_number, playlistData.items)
 
         context?.let {
             collapsing_toolbar.setContentScrimColor(
@@ -71,15 +72,12 @@ class VideoListFragment : Fragment() {
             /*center_progressbar.visibility =
                 if (viewModel.listIsEmpty() && state == State.LOADING) View.VISIBLE else View.GONE*/
             // txt_error.visibility = if (viewModel.listIsEmpty() && state == State.ERROR) View.VISIBLE else View.GONE
-            if (!viewModel.listIsEmpty()) {
-                adapter.setState(state ?: State.DONE)
-            }
+            adapter.setState(state ?: State.DONE)
         })
 
         adapter.onCellClickListener = object : CellClickListener<PlaylistItem> {
             override fun onCellClickListener(data: PlaylistItem) {
                 Log.d(TAG, "onCellClickListener: ${data.snippet.title}")
-
             }
 
         }
