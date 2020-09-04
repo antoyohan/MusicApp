@@ -61,7 +61,7 @@ class PlaylistFragment : Fragment() {
             }
         })
 
-        adapter.onCellClickListener = object : CellClickListener {
+        adapter.onCellClickListener = object : CellClickListener<Playlist> {
             override fun onCellClickListener(data: Playlist) {
                 Log.d(TAG, "onCellClickListener: ${data.snippet.title}")
 
