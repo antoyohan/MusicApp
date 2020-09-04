@@ -8,6 +8,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.musicapp.MainActivity
 import com.example.musicapp.R
+import com.example.musicapp.ui.home.HomeActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -63,7 +64,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun launchMainActivity(account: GoogleSignInAccount) {
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, HomeActivity::class.java)
         var bundle = Bundle()
         bundle.putParcelable("account" , account)
         intent.putExtra("ACCOUNT" , bundle)
