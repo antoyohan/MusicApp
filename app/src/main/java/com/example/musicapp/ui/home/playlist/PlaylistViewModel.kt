@@ -5,8 +5,8 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import com.example.musicapp.repo.PlaylistDataSource
-import com.example.musicapp.repo.PlaylistDataSourceFactory
+import com.example.musicapp.repo.playlist.PlaylistDataSource
+import com.example.musicapp.repo.playlist.PlaylistDataSourceFactory
 import com.example.musicapp.utils.Status
 import com.google.api.services.youtube.model.Playlist
 import io.reactivex.disposables.CompositeDisposable
@@ -19,7 +19,10 @@ class PlaylistViewModel : ViewModel() {
 
     init {
         compositeDisposable = CompositeDisposable()
-        playlistDataSourceFactory = PlaylistDataSourceFactory(compositeDisposable)
+        playlistDataSourceFactory =
+            PlaylistDataSourceFactory(
+                compositeDisposable
+            )
         val config = PagedList.Config.Builder()
             .setInitialLoadSizeHint(pageSize)
             .setPageSize(pageSize * 2)
