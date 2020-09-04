@@ -1,6 +1,5 @@
-package com.example.musicapp.ui.list
+package com.example.musicapp.ui.recycler
 
-import android.net.Uri
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.google.api.services.youtube.model.Playlist

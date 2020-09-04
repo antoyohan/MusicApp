@@ -1,4 +1,4 @@
-package com.example.musicapp.ui.list
+package com.example.musicapp.ui.recycler
 
 import android.view.View
 import android.view.View.VISIBLE
