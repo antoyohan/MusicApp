@@ -7,7 +7,7 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.example.musicapp.repo.PlaylistDataSource
 import com.example.musicapp.repo.PlaylistDataSourceFactory
-import com.example.musicapp.utils.State
+import com.example.musicapp.utils.Status
 import com.google.api.services.youtube.model.Playlist
 import io.reactivex.disposables.CompositeDisposable
 
@@ -25,19 +25,20 @@ class PlaylistViewModel : ViewModel() {
             .setPageSize(pageSize * 2)
             .setEnablePlaceholders(false)
             .build()
-        playlists = LivePagedListBuilder<String, Playlist>(playlistDataSourceFactory, config).build()
+        playlists =
+            LivePagedListBuilder<String, Playlist>(playlistDataSourceFactory, config).build()
     }
 
-   override fun onCleared() {
-      super.onCleared()
-      compositeDisposable.dispose()
-   }
+    override fun onCleared() {
+        super.onCleared()
+        compositeDisposable.dispose()
+    }
 
-    fun getState(): LiveData<State> = Transformations.switchMap<PlaylistDataSource,
-            State>(playlistDataSourceFactory.playlistDataSourceLive, PlaylistDataSource::state)
+    fun getState(): LiveData<Status> = Transformations.switchMap<PlaylistDataSource,
+            Status>(playlistDataSourceFactory.playlistDataSourceLive, PlaylistDataSource::state)
 
     fun retry() {
-        //playlistDataSourceFactory.playlistDataSourceLive.value?.retry()
+        playlistDataSourceFactory.playlistDataSourceLive.value?.retry()
     }
 
     fun listIsEmpty(): Boolean {

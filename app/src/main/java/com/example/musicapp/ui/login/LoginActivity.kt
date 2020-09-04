@@ -6,7 +6,6 @@ import android.os.Handler
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.example.musicapp.MainActivity
 import com.example.musicapp.R
 import com.example.musicapp.ui.home.HomeActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -33,9 +32,13 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        initSigninButton()
+        configureGoogleSignIn()
+    }
+
+    private fun initSigninButton() {
         signin_button.setSize(SignInButton.SIZE_WIDE)
         signin_button.setOnClickListener(this)
-        configureGoogleSignIn()
     }
 
     private fun configureGoogleSignIn() {
@@ -49,7 +52,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     override fun onStart() {
         super.onStart()
         val account = GoogleSignIn.getLastSignedInAccount(this)
-        updateUI(account)
+        //updateUI(account)
     }
 
     private fun updateUI(account: GoogleSignInAccount?) {
@@ -65,9 +68,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun launchMainActivity(account: GoogleSignInAccount) {
         val intent = Intent(this, HomeActivity::class.java)
-        var bundle = Bundle()
-        bundle.putParcelable("account" , account)
-        intent.putExtra("ACCOUNT" , bundle)
+        val bundle = Bundle()
+        bundle.putParcelable("account", account)
+        intent.putExtra("ACCOUNT", bundle)
         startActivity(intent)
     }
 
