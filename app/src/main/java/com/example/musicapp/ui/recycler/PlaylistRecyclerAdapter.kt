@@ -17,6 +17,8 @@ class PlaylistRecyclerAdapter: PagedListAdapter<Playlist, RecyclerView.ViewHolde
     private val FOOTER_VIEW_TYPE = 2
 
     private var state = State.LOADING
+    var onCellClickListener:CellClickListener? = null
+        set(value) {field = value}
 
     companion object {
         val DiffCallback = object : DiffUtil.ItemCallback<Playlist>() {
@@ -43,7 +45,7 @@ class PlaylistRecyclerAdapter: PagedListAdapter<Playlist, RecyclerView.ViewHolde
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (getItemViewType(position) == DATA_VIEW_TYPE)
-            (holder as PlaylistViewHolder).bind(getItem(position))
+            (holder as PlaylistViewHolder).bind(getItem(position), onCellClickListener)
         else (holder as ListFooterViewHolder).bind(state)
     }
 
@@ -64,4 +66,10 @@ class PlaylistRecyclerAdapter: PagedListAdapter<Playlist, RecyclerView.ViewHolde
         this.state = state
         notifyItemChanged(super.getItemCount())
     }
+
+
+}
+
+interface CellClickListener {
+    fun onCellClickListener(data: Playlist)
 }
