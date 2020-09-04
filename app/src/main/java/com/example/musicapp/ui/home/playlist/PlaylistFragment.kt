@@ -57,7 +57,6 @@ class PlaylistFragment : Fragment() {
         viewModel.getState().observe(viewLifecycleOwner, Observer { status ->
             center_progressbar.visibility =
                 if (viewModel.listIsEmpty() && status.state == State.LOADING) View.VISIBLE else View.GONE
-            // txt_error.visibility = if (viewModel.listIsEmpty() && state == State.ERROR) View.VISIBLE else View.GONE
             adapter.setState(status.state ?: State.DONE)
             if (status.state == State.ERROR && status.reason is UserRecoverableAuthIOException) {
                 startActivityForResult(
@@ -70,18 +69,15 @@ class PlaylistFragment : Fragment() {
         adapter.onCellClickListener = object : CellClickListener<Playlist> {
             override fun onCellClickListener(data: Playlist) {
                 Log.d(TAG, "onCellClickListener: ${data.snippet.title}")
-
                 val playlistData = PlaylistData(
                     data.id,
                     data.snippet.title,
                     data.snippet.thumbnails.high.url,
                     data.contentDetails.itemCount
                 )
-
                val action =  PlaylistFragmentDirections.actionPlaylistFragmentToVideoListFragment(playlistData)
                findNavController().navigate(action)
             }
-
         }
     }
 

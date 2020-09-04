@@ -14,6 +14,4 @@ class PlaylistDataSourceFactory(val compositeDisposable: CompositeDisposable) :
         playlistDataSourceLive.postValue(dataSource)
         return dataSource
     }
-
-
 }

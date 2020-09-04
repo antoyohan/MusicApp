@@ -38,13 +38,10 @@ class VideoListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val playlistData = arguments?.let { VideoListFragmentArgs.fromBundle(it).playlist }
-        Log.d(TAG, "onViewCreated: ${playlistData?.name}")
+        val playlistData = arguments?.let { VideoListFragmentArgs.fromBundle(it).playlist}
         viewModelFactory = MainViewModelFactory(playlistData as PlaylistData)
         viewModel = ViewModelProvider(this, viewModelFactory).get(VideolistViewModel::class.java)
         initRecyclerView()
-
         collapsing_toolbar.title = playlistData.name
         num_songs.text = getString(if(playlistData.items > 1) R.string.songs_numbers else R.string.songs_number, playlistData.items)
 
@@ -56,7 +53,6 @@ class VideoListFragment : Fragment() {
                 )
             )
         }
-        Log.d(TAG, "onViewCreated: image ${playlistData.imageUrl}")
         Picasso.get().load(playlistData.imageUrl).into(backdrop)
     }
 
@@ -69,9 +65,6 @@ class VideoListFragment : Fragment() {
         })
 
         viewModel.getState().observe(viewLifecycleOwner, Observer { state ->
-            /*center_progressbar.visibility =
-                if (viewModel.listIsEmpty() && state == State.LOADING) View.VISIBLE else View.GONE*/
-            // txt_error.visibility = if (viewModel.listIsEmpty() && state == State.ERROR) View.VISIBLE else View.GONE
             adapter.setState(state ?: State.DONE)
         })
 
