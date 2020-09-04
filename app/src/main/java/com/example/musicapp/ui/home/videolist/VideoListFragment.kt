@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -17,8 +18,8 @@ import com.example.musicapp.ui.recycler.CellClickListener
 import com.example.musicapp.ui.recycler.PlaylistItemRecyclerAdapter
 import com.example.musicapp.utils.State
 import com.google.api.services.youtube.model.PlaylistItem
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_video_list.*
-import kotlinx.android.synthetic.main.playlist_fragment.*
 
 private const val TAG = "VideoListFragment"
 
@@ -43,6 +44,19 @@ class VideoListFragment : Fragment() {
         viewModelFactory = MainViewModelFactory<PlaylistData>(playlistData as PlaylistData)
         viewModel = ViewModelProvider(this, viewModelFactory).get(VideolistViewModel::class.java)
         initRecyclerView()
+
+        collapsing_toolbar.title = playlistData.name
+
+        context?.let {
+            collapsing_toolbar.setContentScrimColor(
+                ContextCompat.getColor(
+                    it,
+                    R.color.colorPrimary
+                )
+            )
+        }
+        Log.d(TAG, "onViewCreated: image ${playlistData.imageUrl}")
+        Picasso.get().load(playlistData.imageUrl).into(backdrop)
     }
 
     private fun initRecyclerView() {

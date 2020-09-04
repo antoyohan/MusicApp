@@ -68,13 +68,11 @@ class PlaylistFragment : Fragment() {
                 var playlistData = PlaylistData(
                     data.id,
                     data.snippet.title,
-                    data.snippet.thumbnails.default.toString(),
+                    data.snippet.thumbnails.high.url,
                     data.contentDetails.itemCount
                 )
 
                val action =  PlaylistFragmentDirections.actionPlaylistFragmentToVideoListFragment(playlistData)
-
-                //bundle.putBundle("data", playlistData)
                findNavController().navigate(action)
             }
 

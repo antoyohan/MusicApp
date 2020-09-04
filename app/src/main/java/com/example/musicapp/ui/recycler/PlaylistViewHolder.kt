@@ -15,11 +15,11 @@ class PlaylistViewHolder<T>(view: View): RecyclerView.ViewHolder(view) {
         playlist?.let {
             if( playlist is Playlist) {
                 itemView.txt_news_name.text = playlist.snippet.title
-                Picasso.get().load(playlist.snippet.thumbnails.default.url)
+                Picasso.get().load(playlist.snippet.thumbnails.high.url)
                     .into(itemView.img_news_banner)
             } else if (playlist is PlaylistItem) {
                 itemView.txt_news_name.text = playlist.snippet.title
-                Picasso.get().load(playlist.snippet.thumbnails.default.url)
+                Picasso.get().load(playlist.snippet.thumbnails.high.url)
                     .into(itemView.img_news_banner)
             }
 
