@@ -4,9 +4,9 @@ Project repository for a music app
 Basic App showing the public youtube playlist
 
 
-Developed in Native Android
+#Developed in Native Android
 
-Language and Tech
+##Language and Tech
 
 -Kotlin
 
@@ -15,7 +15,7 @@ Language and Tech
 -Android jetpack: Paging, Navigation
 
 
-Screen 1 - GoogleSignin.
+##Screen 1 - GoogleSignin.
 
 Implemented the Google Signin with google Sdk for th user.
  - In the backend : Creating the app in Google console and enabling the Auth token.
